@@ -9,7 +9,7 @@ import { LogBox } from "react-native";
 import { tokenCache } from "@/lib/auth";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
-SplashScreen.preventAutoHideAsync().catch(console.warn);
+SplashScreen.preventAutoHideAsync();
 
 const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY!;
 
@@ -33,21 +33,21 @@ export default function RootLayout() {
   });
 
   useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync();
-    }
-  }, [loaded]);
+    const hideSplash = async () => {
+      if (loaded) {
+        await SplashScreen.hideAsync();
+      }
+    };
 
-  if (!loaded) {
-    return null;
-  }
+    hideSplash().catch(console.warn);
+  }, [loaded]);
 
   return (
     <ClerkProvider tokenCache={tokenCache} publishableKey={publishableKey}>
       <ClerkLoaded>
         <Stack>
           <Stack.Screen name="index" options={{ headerShown: false }} />
-          <Stack.Screen name="auth" options={{ headerShown: false }} />
+          <Stack.Screen name="(auth)" options={{ headerShown: false }} />
           <Stack.Screen name="(root)" options={{ headerShown: false }} />
           <Stack.Screen name="+not-found" />
         </Stack>
