@@ -34,9 +34,9 @@
     },
     "plugins": [
       [
-        "expo-dev-client",
+        "expo-router",
         {
-          "origin": "https://uber.dev/"
+          "origin": "https://e-carpool.com/"
         }
       ],
       "expo-font"

@@ -1,5 +1,6 @@
 import * as Linking from "expo-linking";
 import * as SecureStore from "expo-secure-store";
+import { fetchAPI } from "@/lib/fetch";
 
 // import { fetchAPI } from "../lib/fetch"; // Commented out fetchAPI import
 
@@ -39,7 +40,6 @@ export const googleOAuth = async (startOAuthFlow: any) => {
         await setActive({ session: createdSessionId });
 
         if (signUp.createdUserId) {
-          /*
           await fetchAPI("/(api)/user", {
             method: "POST",
             body: JSON.stringify({
@@ -48,7 +48,6 @@ export const googleOAuth = async (startOAuthFlow: any) => {
               clerkId: signUp.createdUserId,
             }),
           });
-          */
         }
 
         return {
