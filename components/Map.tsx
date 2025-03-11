@@ -68,14 +68,14 @@ const Map = () => {
 
   if (loading || (!userLatitude && !userLongitude))
     return (
-      <View className="flex justify-between items-center w-full">
-        <ActivityIndicator size="small" color="#000" />
+      <View className="flex justify-center items-center w-full h-full">
+        <ActivityIndicator size="large" color="#000" />
       </View>
     );
 
   if (error)
     return (
-      <View className="flex justify-between items-center w-full">
+      <View className="flex justify-center items-center w-full h-full">
         <Text>Error: {error}</Text>
       </View>
     );
@@ -85,13 +85,13 @@ const Map = () => {
       provider={PROVIDER_DEFAULT}
       className="w-full h-full rounded-2xl"
       tintColor="black"
-      mapType="mutedStandard"
+      mapType="standard"
       showsPointsOfInterest={false}
       initialRegion={region}
       showsUserLocation={true}
       userInterfaceStyle="light"
     >
-      {markers.map((marker, index) => (
+      {markers.map((marker) => (
         <Marker
           key={marker.id}
           coordinate={{
@@ -116,19 +116,21 @@ const Map = () => {
             title="Destination"
             image={icons.pin}
           />
-          <MapViewDirections
-            origin={{
-              latitude: userLatitude!,
-              longitude: userLongitude!,
-            }}
-            destination={{
-              latitude: destinationLatitude,
-              longitude: destinationLongitude,
-            }}
-            apikey={process.env.EXPO_PUBLIC_GOOGLE_API_KEY!}
-            strokeColor="#0286FF"
-            strokeWidth={2}
-          />
+          {directionsAPI && (
+            <MapViewDirections
+              origin={{
+                latitude: userLatitude!,
+                longitude: userLongitude!,
+              }}
+              destination={{
+                latitude: destinationLatitude,
+                longitude: destinationLongitude,
+              }}
+              apikey={directionsAPI}
+              strokeColor="#0286FF"
+              strokeWidth={2}
+            />
+          )}
         </>
       )}
     </MapView>

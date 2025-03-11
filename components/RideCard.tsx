@@ -1,5 +1,4 @@
 import { Image, Text, View } from "react-native";
-
 import { icons } from "@/constants";
 import { formatDate, formatTime } from "@/lib/utils";
 import { Ride } from "@/types/type";
@@ -19,54 +18,48 @@ const RideCard = ({ ride }: { ride: Ride }) => {
           <View className="flex flex-col mx-5 gap-y-5 flex-1">
             <View className="flex flex-row items-center gap-x-2">
               <Image source={icons.to} className="w-5 h-5" />
-              <Text className="text-md font-JakartaMedium" numberOfLines={1}>
+              <Text className="text-md font-medium" numberOfLines={1}>
                 {ride.origin_address}
               </Text>
             </View>
 
             <View className="flex flex-row items-center gap-x-2">
               <Image source={icons.point} className="w-5 h-5" />
-              <Text className="text-md font-JakartaMedium" numberOfLines={1}>
+              <Text className="text-md font-medium" numberOfLines={1}>
                 {ride.destination_address}
               </Text>
             </View>
           </View>
         </View>
 
-        <View className="flex flex-col w-full mt-5 bg-general-500 rounded-lg p-3 items-start justify-center">
+        <View className="flex flex-col w-full mt-5 bg-gray-100 rounded-lg p-3">
           <View className="flex flex-row items-center w-full justify-between mb-5">
-            <Text className="text-md font-JakartaMedium text-gray-500">
-              Date & Time
-            </Text>
-            <Text className="text-md font-JakartaBold" numberOfLines={1}>
+            <Text className="text-md text-gray-500">Date & Time</Text>
+            <Text className="text-md font-bold" numberOfLines={1}>
               {formatDate(ride.created_at)}, {formatTime(ride.ride_time)}
             </Text>
           </View>
 
           <View className="flex flex-row items-center w-full justify-between mb-5">
-            <Text className="text-md font-JakartaMedium text-gray-500">
-              Driver
-            </Text>
-            <Text className="text-md font-JakartaBold">
+            <Text className="text-md text-gray-500">Driver</Text>
+            <Text className="text-md font-bold">
               {ride.driver.first_name} {ride.driver.last_name}
             </Text>
           </View>
 
           <View className="flex flex-row items-center w-full justify-between mb-5">
-            <Text className="text-md font-JakartaMedium text-gray-500">
-              Car Seats
-            </Text>
-            <Text className="text-md font-JakartaBold">
-              {ride.driver.car_seats}
-            </Text>
+            <Text className="text-md text-gray-500">Car Seats</Text>
+            <Text className="text-md font-bold">{ride.driver.car_seats}</Text>
           </View>
 
           <View className="flex flex-row items-center w-full justify-between">
-            <Text className="text-md font-JakartaMedium text-gray-500">
-              Payment Status
-            </Text>
+            <Text className="text-md text-gray-500">Payment Status</Text>
             <Text
-              className={`text-md capitalize font-JakartaBold ${ride.payment_status === "paid" ? "text-green-500" : "text-red-500"}`}
+              className={`text-md capitalize font-bold ${
+                ride.payment_status === "paid"
+                  ? "text-green-500"
+                  : "text-red-500"
+              }`}
             >
               {ride.payment_status}
             </Text>
